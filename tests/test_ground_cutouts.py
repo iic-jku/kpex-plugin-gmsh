@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2026 Martin Jan Köhler and Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits.
 #
-# This file is part of klayout-pex-plugin-gmsh
-# (see https://github.com/iic-jku/klayout-pex-plugin-gmsh).
+# This file is part of kpex-plugin-gmsh
+# (see https://github.com/iic-jku/kpex-plugin-gmsh).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,8 +33,8 @@ from unittest.mock import patch
 import klayout.db as kdb
 import pytest
 
-from klayout_pex import pex25d
-from klayout_pex.plugin_api.v1 import SceneCapability
+from kpex import pex25d
+from kpex.plugin_api.v1 import SceneCapability
 from klayout_pex_plugins.gmsh import GmshMeshOptions, GmshSceneExporter, write_mesh
 from klayout_pex_plugins.gmsh.solids import BodyKind, _SolidsBuilder, scene_solids
 from .test_exporter import meshed_volumes, physical_groups
@@ -150,7 +150,7 @@ def test_capabilities_are_available_without_constructing_exporter():
 
 @pytest.mark.parametrize('direct', [False, True])
 def test_accounting_is_rejected_before_output(tmp_path: Path, direct: bool, ground_cutout: Any):
-    from klayout_pex_protobuf.kpex.pex25d.pex25d_capabilities_pb2 import REQUIRED_CAPABILITY_CAPACITANCE_ACCOUNTING
+    from kpex_protobuf.kpex.pex25d.pex25d_capabilities_pb2 import REQUIRED_CAPABILITY_CAPACITANCE_ACCOUNTING
     original = ground_cutout
     original.required_capabilities.append(REQUIRED_CAPABILITY_CAPACITANCE_ACCOUNTING)
     before = original.SerializeToString(deterministic=True)
@@ -165,7 +165,7 @@ def test_accounting_is_rejected_before_output(tmp_path: Path, direct: bool, grou
 
 
 def test_mesh_helper_rejects_accounting_before_geometry(tmp_path: Path, ground_cutout: Any):
-    from klayout_pex_protobuf.kpex.pex25d.pex25d_capabilities_pb2 import REQUIRED_CAPABILITY_CAPACITANCE_ACCOUNTING
+    from kpex_protobuf.kpex.pex25d.pex25d_capabilities_pb2 import REQUIRED_CAPABILITY_CAPACITANCE_ACCOUNTING
     ground_cutout.required_capabilities.append(REQUIRED_CAPABILITY_CAPACITANCE_ACCOUNTING)
     with patch('klayout_pex_plugins.gmsh.solids.scene_solids',
                side_effect=AssertionError('geometry ran before capability validation')) as build:

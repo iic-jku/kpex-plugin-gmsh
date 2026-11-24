@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2026 Martin Jan Köhler and Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits.
 #
-# This file is part of klayout-pex-plugin-gmsh
-# (see https://github.com/iic-jku/klayout-pex-plugin-gmsh).
+# This file is part of kpex-plugin-gmsh
+# (see https://github.com/iic-jku/kpex-plugin-gmsh).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -49,11 +49,11 @@ import os
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, Iterator, List, Optional
 
-from klayout_pex.log import debug, info
-from klayout_pex.plugin_api.v1 import ExportError, ExporterUnavailable
+from kpex.log import debug, info
+from kpex.plugin_api.v1 import ExportError, ExporterUnavailable
 
 if TYPE_CHECKING:
-    from klayout_pex_protobuf.kpex.pex25d.pex25d_scene_pb2 import PEX25DScene
+    from kpex_protobuf.kpex.pex25d.pex25d_scene_pb2 import PEX25DScene
 
     from .options import GmshMeshOptions
     from .solids import Body, SceneSolids
@@ -117,7 +117,7 @@ def write_mesh(scene: PEX25DScene,
     Mesh ``scene`` and write ``<prefix>mesh.msh`` (gmsh 2.2, ASCII), plus
     ``<prefix>mesh.json`` naming each physical group.
     """
-    from klayout_pex.plugin_api.v1 import require_scene_capabilities
+    from kpex.plugin_api.v1 import require_scene_capabilities
     from .exporter import GmshSceneExporter
 
     require_scene_capabilities(GmshSceneExporter(), scene, GmshSceneExporter.name)
@@ -126,7 +126,7 @@ def write_mesh(scene: PEX25DScene,
     except ImportError as exc:
         raise ExporterUnavailable(f"The gmsh Python module is not installed: {exc}") from exc
     from .solids import scene_solids
-    from klayout_pex.plugin_api.v1 import write_solver_body_map
+    from kpex.plugin_api.v1 import write_solver_body_map
 
     solids = scene_solids(scene, settings.field_margin_um)
 
@@ -156,7 +156,7 @@ def _session(gmsh: Any, verbose: bool) -> Iterator[None]:
     if owner:
         gmsh.initialize(readConfigFiles=False)
     gmsh.option.setNumber('General.Terminal', 1 if verbose else 0)
-    gmsh.model.add('klayout-pex-plugin-gmsh')
+    gmsh.model.add('kpex-plugin-gmsh')
     try:
         yield
     finally:
@@ -330,7 +330,7 @@ def _groups_document(result: MeshResult) -> Dict[str, Any]:
         return document
 
     return {
-        'generator': f"klayout-pex-plugin-gmsh {metadata.version('klayout-pex-plugin-gmsh')}",
+        'generator': f"kpex-plugin-gmsh {metadata.version('kpex-plugin-gmsh')}",
         'mesh': os.path.basename(result.msh_path),
         'length_unit_m': LENGTH_UNIT_M,
         'mesh_size_edge_um': result.mesh_size_edge_um,

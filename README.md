@@ -1,13 +1,13 @@
-# klayout-pex-plugin-gmsh
+# kpex-plugin-gmsh
 
-gmsh volume meshes of [KLayout-PEX](https://github.com/iic-jku/klayout-pex) PEX25D scenes, for FEM field solvers:
+gmsh volume meshes of [KPEX](https://github.com/iic-jku/kpex) PEX25D scenes, for FEM field solvers:
 - the exporter `gmsh`
-- the mesh builder that [klayout-pex-plugin-elmer](https://github.com/iic-jku/klayout-pex-plugin-elmer) and [klayout-pex-plugin-palace](https://github.com/iic-jku/klayout-pex-plugin-palace) share
+- the mesh builder that [kpex-plugin-elmer](https://github.com/iic-jku/kpex-plugin-elmer) and [kpex-plugin-palace](https://github.com/iic-jku/kpex-plugin-palace) share
 
 ## Usage
 
 ```bash
-pip install klayout-pex-plugin-gmsh
+pip install kpex-plugin-gmsh
 pex25d export cell.pex25d --to gmsh --out_dir mesh
 ```
 
@@ -65,9 +65,14 @@ How the default edge size does on the ihp-sg13g2 test design `overlap_plates_100
 - **Conformal films:** grow along their WRAPS chain, as PEX25D specifies. A film wrapping a film that covers the field lies on top of it there.
 - **Conformal mesh:** the prisms are extruded with OpenCASCADE and fragmented, so touching solids share faces.
 
+## Migration
+
+Moving from `klayout-pex-plugin-gmsh`? Install the renamed plugins in a fresh
+environment with `kpex>=0.12.0` to avoid registering the same exporters twice.
+
 ## Requirements
 
-- `klayout-pex>=0.10.0,<1` (plugin API `v1` is provisional)
+- `kpex>=0.12.0,<1` (plugin API `v1` is provisional)
 - gmsh ≥ 4.12. IIC-OSIC-TOOLS provides 4.12.1 from APT, and PyPI has no Linux aarch64 wheel, so the code sticks to the 4.12 API.
 
 ## Development
@@ -87,20 +92,20 @@ Funded by the European Union. Views and opinions expressed are however those of 
 
 <p align="center">
   <a href="https://iic.jku.at" target="_blank">
-    <img src="https://github.com/iic-jku/klayout-pex-website/raw/main/figures/funding/iic-jku.svg" alt="Johannes Kepler University: Institute for Integrated Circuits and Quantum Computing" width="300"/>
+    <img src="https://github.com/iic-jku/kpex-website/raw/main/figures/funding/iic-jku.svg" alt="Johannes Kepler University: Institute for Integrated Circuits and Quantum Computing" width="300"/>
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://silicon-austria-labs.com" target="_blank">
-    <img src="https://github.com/iic-jku/klayout-pex-website/raw/main/figures/funding/silicon-austria-labs-logo.svg" alt="Silicon Austria Labs" width="300"/>
+    <img src="https://github.com/iic-jku/kpex-website/raw/main/figures/funding/silicon-austria-labs-logo.svg" alt="Silicon Austria Labs" width="300"/>
   </a>
 </p>
 
 <p align="center">
   <a href="https://ode4ec.eu/projects/ams/" target="_blank">
-    <img src="https://github.com/iic-jku/klayout-pex-website/raw/main/figures/funding/eu-cofunded.svg" alt="Co-funded by the European Union" width="300"/>
+    <img src="https://github.com/iic-jku/kpex-website/raw/main/figures/funding/eu-cofunded.svg" alt="Co-funded by the European Union" width="300"/>
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://www.chips-ju.europa.eu" target="_blank">
-    <img src="https://github.com/iic-jku/klayout-pex-website/raw/main/figures/funding/chips-ju.png" alt="Chips Joint Undertaking" width="300"/>
+    <img src="https://github.com/iic-jku/kpex-website/raw/main/figures/funding/chips-ju.png" alt="Chips Joint Undertaking" width="300"/>
   </a>
 </p>

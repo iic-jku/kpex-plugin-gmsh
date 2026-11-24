@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2026 Martin Jan Köhler and Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits.
 #
-# This file is part of klayout-pex-plugin-gmsh
-# (see https://github.com/iic-jku/klayout-pex-plugin-gmsh).
+# This file is part of kpex-plugin-gmsh
+# (see https://github.com/iic-jku/kpex-plugin-gmsh).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ from __future__ import annotations
 from dataclasses import dataclass, fields
 from typing import Any, Mapping, Optional, Type, TypeVar
 
-from klayout_pex.plugin_api.v1 import ExportError
+from kpex.plugin_api.v1 import ExportError
 
 _TYPES = {
     'bool': (bool,),
