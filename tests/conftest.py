@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2026 Martin Jan Köhler and Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits.
 #
-# This file is part of klayout-pex-plugin-gmsh
-# (see https://github.com/iic-jku/klayout-pex-plugin-gmsh).
+# This file is part of kpex-plugin-gmsh
+# (see https://github.com/iic-jku/kpex-plugin-gmsh).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ Scenes for the tests.
 ``two_nets.pex25d`` is hand-written: two nets (one with a via), a floating
 conductor, and a film wrapping a film that covers the field.
 ``overlap_plates_100um_x_100um_m1_m2.pex25d`` is what ``kpex pex25d`` writes for
-the KLayout-PEX test design of that name in ihp-sg13g2.
+the KPEX test design of that name in ihp-sg13g2.
 """
 
 from __future__ import annotations
@@ -37,19 +37,19 @@ from pathlib import Path
 
 import pytest
 
-from klayout_pex import pex25d
+from kpex import pex25d
 
 DATA = Path(__file__).parent.parent / 'testdata'
 
 
 def pytest_collection_modifyitems(items):
     """
-    Group these tests on the KLayout-PEX Allure page, whose CI runs them too.
+    Group these tests on the KPEX Allure page, whose CI runs them too.
     Labels as marks, so that tests skipped before their fixtures run get them too.
     """
     for item in items:
         for label_type, value in (('parentSuite', 'Plugin Tests'),
-                                  ('suite', 'klayout-pex-plugin-gmsh'),
+                                  ('suite', 'kpex-plugin-gmsh'),
                                   ('subSuite', item.module.__name__.rsplit('.', 1)[-1])):
             item.add_marker(pytest.mark.allure_label(value, label_type=label_type))
 

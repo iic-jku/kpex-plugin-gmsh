@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2026 Martin Jan Köhler and Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits.
 #
-# This file is part of klayout-pex-plugin-gmsh
-# (see https://github.com/iic-jku/klayout-pex-plugin-gmsh).
+# This file is part of kpex-plugin-gmsh
+# (see https://github.com/iic-jku/kpex-plugin-gmsh).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 # --------------------------------------------------------------------------------
 #
 
-"""The mesh, its physical groups, and the exporter as KLayout-PEX sees it."""
+"""The mesh, its physical groups, and the exporter as KPEX sees it."""
 
 from __future__ import annotations
 
@@ -33,8 +33,8 @@ from typing import Dict
 import gmsh
 import pytest
 
-from klayout_pex import pex25d
-from klayout_pex.pex25d.pex25d_cli import Pex25DCLI
+from kpex import pex25d
+from kpex.pex25d.pex25d_cli import Pex25DCLI
 from klayout_pex_plugins.gmsh import GmshMeshOptions, write_mesh
 from klayout_pex_plugins.gmsh.solids import BodyKind, scene_solids
 
@@ -148,12 +148,12 @@ def test_touching_nets_are_rejected(tmp_path: Path):
 
 def test_registered_as_exporter_plugin():
     info = pex25d.exporter_registry().get_info('gmsh')
-    assert info.distribution == 'klayout-pex-plugin-gmsh'
+    assert info.distribution == 'kpex-plugin-gmsh'
     assert info.target == 'klayout_pex_plugins.gmsh:create_exporter'
 
 
 def test_public_api_export(overlap_plates, tmp_path: Path):
-    written = pex25d.export(overlap_plates, 'klayout-pex-plugin-gmsh:gmsh', str(tmp_path),
+    written = pex25d.export(overlap_plates, 'kpex-plugin-gmsh:gmsh', str(tmp_path),
                             options={'field_margin_um': 4.0, **COARSE})
     assert written == [str(tmp_path / 'mesh.msh'), str(tmp_path / 'mesh.json')]
     groups = physical_groups(written[0])

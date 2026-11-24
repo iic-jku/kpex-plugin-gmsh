@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2026 Martin Jan Köhler and Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits.
 #
-# This file is part of klayout-pex-plugin-gmsh
-# (see https://github.com/iic-jku/klayout-pex-plugin-gmsh).
+# This file is part of kpex-plugin-gmsh
+# (see https://github.com/iic-jku/kpex-plugin-gmsh).
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -50,14 +50,14 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 
 import klayout.db as kdb
 
-from klayout_pex import pex25d
-from klayout_pex.plugin_api.v1 import (
+from kpex import pex25d
+from kpex.plugin_api.v1 import (
     ExportError, GroundGeometryError, check_native_ground_coordinate, retained_ground_region,
     conductor_body, ground_body, solver_body_names, region_of,
 )
 
 if TYPE_CHECKING:
-    from klayout_pex_protobuf.kpex.pex25d.pex25d_scene_pb2 import PEX25DScene
+    from kpex_protobuf.kpex.pex25d.pex25d_scene_pb2 import PEX25DScene
 
 
 class BodyKind(Enum):
